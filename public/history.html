@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Set background color to black */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white; /* Set text color to white for better contrast */
+        }
+        .container {
+            background-color: #fff; /* Keep the container background white */
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px; /* Adjusted width for better display */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: black; /* Set text color to black for container content */
+            max-height: 90vh;
+            overflow-y: auto; /* Allow vertical scrolling */
+            scrollbar-width: none; /* For Firefox */
+        }
+        /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+        .container::-webkit-scrollbar {
+            display: none; 
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .donation-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .donate-btn, .back-btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .donate-btn:hover, .back-btn:hover {
+            background-color: #0069d9;
+        }
+        .status-btn, .delete-btn {
+            width: 48%; /* Same width for Pending/Delete buttons */
+            background-color: #007bff; /* Color for status buttons */
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .delete-btn {
+            background-color: #dc3545; /* Red color for delete button */
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .status-btn:hover {
+            background-color: #0069d9; /* Same hover color for status button */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>History</h1> <!-- Page Heading -->
+        <div id="donation-list">
+            <!-- Donation details will be dynamically inserted here -->
+        </div>
+        <button class="donate-btn" onclick="window.location.href='donate_food.html'">Donate More</button>
+        <button class="back-btn" onclick="window.history.back()">Back</button>
+    </div>
+
+    <script>
+        // Function to display donation details
+        function displayDonationDetails() {
+            const donationList = document.getElementById('donation-list');
+            const history = JSON.parse(localStorage.getItem('donationHistory')) || [];
+
+            // Check if there are any donation details
+            if (history.length === 0) {
+                donationList.innerHTML = '<p>No donation details available.</p>';
+                return;
+            }
+
+            // Clear the existing content
+            donationList.innerHTML = '';
+
+            // Loop through each donation and display it
+            history.forEach((item, index) => {
+                const donationItem = document.createElement('div');
+                donationItem.className = 'donation-item';
+                donationItem.innerHTML = `
+                    <strong>Donation #${index + 1}</strong><br>
+                    <strong>Item Name:</strong> ${item.itemName}<br>
+                    <strong>Quantity:</strong> ${item.quantity}<br>
+                    <strong>Contact:</strong> ${item.contact}<br>
+                    <strong>Address:</strong> ${item.address}<br>
+                    <button class="status-btn" onclick="updateStatus(${index})">${item.status || 'Pending'}</button>
+                    <button class="delete-btn" onclick="deleteDonation(${index})">Delete</button>
+                `;
+                donationList.appendChild(donationItem);
+            });
+        }
+
+        // Function to delete a donation
+        function deleteDonation(index) {
+            const history = JSON.parse(localStorage.getItem('donationHistory')) || [];
+            history.splice(index, 1); // Remove the item at the specified index
+            localStorage.setItem('donationHistory', JSON.stringify(history)); // Update local storage
+            displayDonationDetails(); // Refresh the displayed donations
+        }
+
+        // Function to update the status of a donation
+        function updateStatus(index) {
+            const history = JSON.parse(localStorage.getItem('donationHistory')) || [];
+            // Toggle status between 'Pending' and 'Accepted'
+            history[index].status = history[index].status === 'Pending' ? 'Accepted' : 'Pending';
+            localStorage.setItem('donationHistory', JSON.stringify(history)); // Save the updated status
+            displayDonationDetails(); // Refresh the display
+        }
+
+        // Call the function to display donation details when the page loads
+        window.onload = displayDonationDetails;
+    </script>
+
+</body>
+</html>

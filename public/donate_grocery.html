@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Grocery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Set background color to black */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white; /* Set text color to white for better contrast */
+        }
+        .container {
+            background-color: #fff; /* Keep the container background white */
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black; /* Set header text color to black */
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: black; /* Set label text color to black */
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .add-item-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .add-item-btn:hover {
+            background-color: #218838;
+        }
+        .contact-info, .address-info {
+            background-color: #f0f0f0;
+            color: black; /* Set text color to black */
+        }
+        .donate-btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .donate-btn:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>DONATE GROCERY</h1>
+
+        <!-- Grocery Items Section -->
+        <label for="donation">Grocery Items</label>
+        <input type="text" id="donation" value="Grocery" readonly>
+
+        <div style="display: flex; justify-content: space-between;">
+            <input type="text" placeholder="Item Name" style="width: 65%;">
+            <input type="text" placeholder="Qty" style="width: 30%;">
+        </div>
+
+        <button class="add-item-btn">Add Item +</button>
+
+        <!-- Organization Selection -->
+        <label for="organization">Donate To:</label>
+        <select id="organization">
+            <option value="" disabled selected>Select Organization</option>
+            <option value="org1">Organization 1</option>
+            <option value="org2">Organization 2</option>
+            <option value="org3">Organization 3</option>
+        </select>
+
+        <!-- Contact Information -->
+        <label>Contact:</label>
+        <div class="contact-info">
+            <input type="text" placeholder="enter contact no"/> <!-- Replace with actual mobile number -->
+        </div>
+
+        <!-- Address Information -->
+        <label>Address:</label>
+        <div class="address-info">
+            <input type="text" placeholder="enter address"/> <!-- Replace with actual address -->
+        </div>
+
+        <!-- Donate Button -->
+        <button class="donate-btn">Donate</button>
+    </div>
+
+</body>
+</html>

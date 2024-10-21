@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Food</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Set background color to black */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white; /* Set text color to white for better contrast */
+        }
+        .container {
+            background-color: #fff; /* Keep the container background white */
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black; /* Set header text color to black */
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: black; /* Set label text color to black */
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .add-item-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .add-item-btn:hover {
+            background-color: #218838;
+        }
+        .donate-btn {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .donate-btn:hover {
+            background-color: #0069d9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>DONATE FOOD</h1>
+
+        <!-- Food Items Section -->
+        <label for="donation">Food Items</label>
+        <input type="text" id="donation" value="Food" readonly>
+
+        <div style="display: flex; justify-content: space-between;">
+            <input type="text" id="itemName" placeholder="Item Name" style="width: 65%;">
+            <input type="text" id="quantity" placeholder="Qty" style="width: 30%;">
+        </div>
+
+        <button class="add-item-btn">Add Item +</button>
+
+        <!-- Organization Selection -->
+        <label for="organization">Donate To:</label>
+        <select id="organization">
+            <option value="" disabled selected>Select Organization</option>
+            <option value="org1">Organization 1</option>
+            <option value="org2">Organization 2</option>
+            <option value="org3">Organization 3</option>
+        </select>
+
+        <!-- Contact Information -->
+        <label>Contact:</label>
+        <input type="text" id="contact" placeholder="Enter contact no"/>
+
+        <!-- Address Information -->
+        <label>Address:</label>
+        <input type="text" id="address" placeholder="Enter address"/>
+
+        <!-- Donate Button -->
+        <button class="donate-btn" onclick="handleDonate()">Donate</button>
+    </div>
+
+    <script>
+        // Function to handle form submission
+        function handleDonate() {
+            const itemName = document.getElementById('itemName').value;
+            const quantity = document.getElementById('quantity').value;
+            const contact = document.getElementById('contact').value;
+            const address = document.getElementById('address').value;
+
+            // Create a donation object
+            const donation = {
+                itemName: itemName,
+                quantity: quantity,
+                contact: contact,
+                address: address
+            };
+
+            // Get existing history or initialize an empty array
+            const existingHistory = JSON.parse(localStorage.getItem('donationHistory')) || [];
+            existingHistory.push(donation); // Add the new donation to the history
+
+            // Save the updated history back to local storage
+            localStorage.setItem('donationHistory', JSON.stringify(existingHistory));
+
+            // Redirect to the donation details page
+            window.location.href = 'donation_details.html';
+        }
+    </script>
+
+</body>
+</html>

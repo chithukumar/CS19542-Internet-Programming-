@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        table {
+            margin: auto;
+        }
+        #message {
+            color: red;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <center>
+        <h1>Sign In</h1>
+        <form onsubmit="return signUp(event);">
+            <table>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="text" id="email" placeholder="Enter your mail id" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" placeholder="Enter your password" required></td>
+                </tr>
+            </table>
+            <br>
+            <input type="submit" value="Sign In" onclick="window.location.href='donate.html'">
+        </form>
+        <div id="message"></div> <!-- Placeholder for error messages -->
+    </center>
+
+    <script>
+        async function signUp(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const messageElement = document.getElementById("message");
+
+            try {
+                const response = await fetch('/donor_signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password }) // Send email and password in the request body
+                });
+
+                const result = await response.json(); // Get response from the server
+
+                if (response.ok) {
+                    // If sign-up is successful, display a success message
+                    messageElement.textContent = result.message;
+                } else {
+                    // If sign-up fails, display the error message
+                    messageElement.textContent = result.message; // Display the error message returned from the server
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                messageElement.textContent = 'An error occurred during sign-up. Please try again.';
+            }
+
+            return false; // Prevent further processing
+        }
+    </script>
+</body>
+</html>

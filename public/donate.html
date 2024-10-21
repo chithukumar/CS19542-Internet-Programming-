@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            background-color: rgba(0, 0, 0, 0.6); /* Darken background */
+            border-radius: 15px;
+            padding: 20px;
+        }
+        .donate-card {
+            background-color: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            width: 40%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .donate-card h2 {
+            margin-bottom: 15px;
+        }
+        .donate-card p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .donate-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .donate-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body bgcolor="black" style ="color:white;">
+
+    <div class="container">
+        <!-- Donate Food Section -->
+        <div class="donate-card">
+            <h2>Donate Food</h2>
+            <p>
+                Food donation serves a dual purpose by reducing food wastage and providing essential sustenance 
+                to individuals and families facing economic challenges. Foster a sense of community by donating.
+            </p>
+            <button class="donate-button" onclick="window.location.href='donate_food.html'">Donate</button>
+        </div>
+
+        <!-- Donate Grocery Section -->
+        <div class="donate-card">
+            <h2>Donate Grocery</h2>
+            <p>
+                Support individuals and families facing financial hardship by providing necessary resources to meet their needs.
+                Grocery donations can make a significant difference in community initiatives.
+            </p>
+            <button class="donate-button" onclick="window.location.href='donate_grocery.html'">Donate</button>
+        </div>
+    </div>
+
+</body>
+</html>
